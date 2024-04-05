@@ -69,44 +69,44 @@ public class GestCourse {
                 Requête d'insertion dans la base de données
              */
             String query = "INSERT INTO APICOURSE (nom, priceMoney, dateDebut, dateFin, kmTotal) VALUES (?, ?, ?, ?, ?)";
-            try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
-                pstm.setString(1, nom);
-                pstm.setBigDecimal(2, prix);
-                pstm.setDate(3, Date.valueOf(dateDebut));
-                pstm.setDate(4, Date.valueOf(dateFin));
-                pstm.setInt(5, kmTotal);
+            try (PreparedStatement pstm = dbConnect.prepareStatement(query )) {
+                pstm.setString(1, nom );
+                pstm.setBigDecimal(2, prix );
+                pstm.setDate(3, Date.valueOf(dateDebut ));
+                pstm.setDate(4, Date.valueOf(dateFin ));
+                pstm.setInt(5, kmTotal );
                 int result = pstm.executeUpdate();
                 if (result > 0) {
-                    System.out.println("La course a été ajoutée avec succès !");
+                    System.out.println("La course a été ajoutée avec succès ! ");
                 } else {
-                    System.out.println("Erreur lors de l'ajout de la course.");
+                    System.out.println("Erreur lors de l'ajout de la course. ");
                 }
             } catch (SQLException e) {
-                System.out.println("Erreur SQL lors de l'ajout de la course : " + e.getMessage());
+                System.out.println("Erreur SQL lors de l'ajout de la course :" + e.getMessage());
             }
         } catch (Exception e) {
-            System.out.println("Erreur lors de la saisie des données de la course : " + e.getMessage());
+            System.out.println("Erreur lors de la saisie des données de la course :" + e.getMessage());
         }
     }
 
 
     public void rechercher() {
         try {
-            System.out.print("Entrez l'ID de la course à rechercher : ");
+            System.out.print("Entrez l'ID de la course à rechercher : " );
             int courseId = sc.nextInt();
-            String query = "SELECT * FROM APICOURSE WHERE courseId = ?";
-            try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
+            String query = "SELECT * FROM APICOURSE WHERE courseId = ?" ;
+            try (PreparedStatement pstm = dbConnect.prepareStatement(query )) {
                 pstm.setInt(1, courseId);
                 ResultSet rs = pstm.executeQuery();
                 if (rs.next()) {
-                    System.out.println("ID : " + rs.getInt("courseId"));
-                    System.out.println("Nom : " + rs.getString("nom"));
-                    System.out.println("Prix : " + rs.getBigDecimal("priceMoney"));
-                    System.out.println("Date de début : " + rs.getDate("dateDebut"));
-                    System.out.println("Date de fin : " + rs.getDate("dateFin"));
-                    System.out.println("Kilométrage total : " + rs.getInt("kmTotal"));
-                } else {
-                    System.out.println("Aucune course trouvée " + courseId);
+                    System.out.println("ID : " + rs.getInt("courseId" ));
+                    System.out.println("Nom : " + rs.getString("nom" ));
+                    System.out.println("Prix : " + rs.getBigDecimal("priceMoney" ));
+                    System.out.println("Date de début : " + rs.getDate("dateDebut" ));
+                    System.out.println("Date de fin : " + rs.getDate("dateFin" ));
+                    System.out.println("Kilométrage total : " + rs.getInt("kmTotal" ));
+                } else{
+                    System.out.println("Aucune course trouvée " + courseId );
                 }
             } catch (SQLException e) {
                 System.out.println("Erreur sur course : " + e.getMessage());
@@ -118,19 +118,19 @@ public class GestCourse {
 
     public void modifier() {
         try {
-            System.out.print("Entrez l'Identifiant de la course à modifier : ");
+            System.out.print("Entrez l'Identifiant de la course à modifier :");
             int courseId = sc.nextInt();
-            System.out.print("Entrez le nouveau prix de la course : ");
+            System.out.print("Entrez le nouveau prix de la course :");
             BigDecimal nouveauPrix = sc.nextBigDecimal();
             String query = "UPDATE APICOURSE SET priceMoney = ? WHERE courseId = ?";
-            try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
-                pstm.setBigDecimal(1, nouveauPrix);
-                pstm.setInt(2, courseId);
+            try (PreparedStatement pstm = dbConnect.prepareStatement(query )) {
+                pstm.setBigDecimal(1, nouveauPrix );
+                pstm.setInt(2, courseId );
                 int result = pstm.executeUpdate();
                 if (result > 0) {
-                    System.out.println("La modification de la course a reussi !");
+                    System.out.println("La modification de la course a reussi ! ");
                 } else {
-                    System.out.println("Aucune course trouvée avec l'Identifiant " + courseId);
+                    System.out.println("Aucune course trouvée avec l'Identifiant " + courseId );
                 }
             } catch (SQLException e) {
                 System.out.println("Erreur sur la modification de la course : " + e.getMessage());
@@ -142,7 +142,7 @@ public class GestCourse {
 
     public void supprimer() {
         try {
-            System.out.print("Entrez l'Identifiant de la course à supprimer : ");
+            System.out.print("Entrez l'Identifiant de la course à supprimer :");
             int courseId = sc.nextInt();
             String query = "DELETE FROM APICOURSE WHERE courseId = ?";
             try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
